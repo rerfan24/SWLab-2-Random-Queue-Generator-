@@ -1,1 +1,1 @@
-# SWLab-2-Random-Queue-Generator-
+# SWLab-2 (Random-Queue-Generator)
