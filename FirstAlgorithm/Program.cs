@@ -33,23 +33,46 @@ class Program
             }
         }
 
+        problem = true;
         System.Console.Write("Do you want to name your people? (Y,N) ");
-        if (Console.ReadLine() == "Y")
+        while (problem)
         {
-            for (int i = 0; i < remainingSeeds; i++)
+            try
             {
-                System.Console.WriteLine("enter person number " + i + "'s name: ");
-                string name = Console.ReadLine();
-                people.Add(name);
-                turn.Add(0);
+                string? val = Console.ReadLine();
+                if (val == "Y" || val == "y")
+                {
+                    for (int i = 0; i < remainingSeeds; i++)
+                    {
+                        System.Console.WriteLine("enter person number " + i + "'s name: ");
+                        string? name = Console.ReadLine();
+                        while (name == null || name == "")
+                        {
+                            System.Console.WriteLine("enter person number " + i + "'s name: ");
+                            name = Console.ReadLine();
+                        }
+                        people.Add(name);
+                        turn.Add(0);
+                    }
+                    problem = false;
+                }
+                else if (val == "N" || val == "n")
+                {
+                    for (int i = 0; i < remainingSeeds; i++)
+                    {
+                        people.Add(Convert.ToString(i + 1));
+                        turn.Add(0);
+                    }
+                    problem = false;
+                }
+                else
+                {
+                    throw new InvalidDataException("(Y,N) only... ");
+                }
             }
-        }
-        else
-        {
-            for (int i = 0; i < remainingSeeds; i++)
+            catch (InvalidDataException ex)
             {
-                people.Add(Convert.ToString(i + 1));
-                turn.Add(0);
+                System.Console.Write(ex.Message);
             }
         }
 
