@@ -6,26 +6,73 @@ class Program
         Random rnd = new Random();
         List<string> people = new List<string>();
         List<int> turn = new List<int>();
+        int remainingSeeds = 0;
 
         System.Console.WriteLine("Enter the number of the people you have to put in queue:");
-        int remainingSeeds = Convert.ToInt32(Console.ReadLine());
-        System.Console.Write("Do you want to name your people? (Y,N) ");
-        if (Console.ReadLine() == "Y")
+        bool problem = true;
+        while (problem)
         {
-            for (int i = 0; i < remainingSeeds; i++)
+            string? val = Console.ReadLine();
+
+            try
             {
-                System.Console.WriteLine("enter person number " + i + "'s name: ");
-                string name = Console.ReadLine();
-                people.Add(name);
-                turn.Add(0);
+                remainingSeeds = Convert.ToInt32(val);
+                if (remainingSeeds < 0)
+                {
+                    throw new InvalidDataException("Number must be greater than or equal to 0, please try again:");
+                }
+                problem = false;
+            }
+            catch (FormatException)
+            {
+                System.Console.WriteLine("Not a number!! please try again:");
+            }
+            catch (InvalidDataException ex)
+            {
+                System.Console.WriteLine(ex.Message);
             }
         }
-        else
+
+        problem = true;
+        System.Console.Write("Do you want to name your people? (Y,N) ");
+        while (problem)
         {
-            for (int i = 0; i < remainingSeeds; i++)
+            try
             {
-                people.Add(Convert.ToString(i + 1));
-                turn.Add(0);
+                string? val = Console.ReadLine();
+                if (val == "Y" || val == "y")
+                {
+                    for (int i = 0; i < remainingSeeds; i++)
+                    {
+                        System.Console.WriteLine("enter person number " + i + "'s name: ");
+                        string? name = Console.ReadLine();
+                        while (name == null || name == "")
+                        {
+                            System.Console.WriteLine("enter person number " + i + "'s name: ");
+                            name = Console.ReadLine();
+                        }
+                        people.Add(name);
+                        turn.Add(0);
+                    }
+                    problem = false;
+                }
+                else if (val == "N" || val == "n")
+                {
+                    for (int i = 0; i < remainingSeeds; i++)
+                    {
+                        people.Add(Convert.ToString(i + 1));
+                        turn.Add(0);
+                    }
+                    problem = false;
+                }
+                else
+                {
+                    throw new InvalidDataException("(Y,N) only... ");
+                }
+            }
+            catch (InvalidDataException ex)
+            {
+                System.Console.Write(ex.Message);
             }
         }
 
