@@ -58,7 +58,8 @@ class Program
         System.Console.Clear();
         for (int i = 0; i < remainingSeeds; i++)
         {
-            System.Console.WriteLine(people[i] + "'s turn is: " + turn[i]);
+            System.Console.Write(string.Format("{0,-10}", people[i]));
+            System.Console.WriteLine(": " + turn[i]);
         }
     }
 }
