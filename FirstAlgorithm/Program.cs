@@ -1,12 +1,14 @@
-﻿using System;
-
-namespace FirstAlgorithm
+﻿namespace firstAlgorithm;
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        Random rnd = new Random();
+        List<int> people = new List<int>();
+        for (int i = 0; i < 5; i++)
         {
-            Console.WriteLine("Hello World!");
+            people.Add(i + 1);
         }
+        Console.WriteLine("[" + string.Join(", ", people) + "]");
     }
 }
