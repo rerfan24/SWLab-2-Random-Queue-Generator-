@@ -4,14 +4,29 @@ class Program
     static void Main(string[] args)
     {
         Random rnd = new Random();
-        List<int> people = new List<int>();
+        List<string> people = new List<string>();
         List<int> turn = new List<int>();
 
-        int remainingSeeds = 5;
-        for (int i = 0; i < remainingSeeds; i++)
+        System.Console.WriteLine("Enter the number of the people you have to put in queue:");
+        int remainingSeeds = Convert.ToInt32(Console.ReadLine());
+        System.Console.Write("Do you want to name your people? (Y,N) ");
+        if (Console.ReadLine() == "Y")
         {
-            people.Add(i + 1);
-            turn.Add(0);
+            for (int i = 0; i < remainingSeeds; i++)
+            {
+                System.Console.WriteLine("enter person number " + i + "'s name: ");
+                string name = Console.ReadLine();
+                people.Add(name);
+                turn.Add(0);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < remainingSeeds; i++)
+            {
+                people.Add(Convert.ToString(i + 1));
+                turn.Add(0);
+            }
         }
 
         int turnNumber = 1;
@@ -40,9 +55,11 @@ class Program
 
         }
 
+        System.Console.Clear();
         for (int i = 0; i < remainingSeeds; i++)
         {
-            System.Console.WriteLine(people[i] + "'s turn is: " + turn[i]);
+            System.Console.Write(string.Format("{0,-10}", people[i]));
+            System.Console.WriteLine(": " + turn[i]);
         }
     }
 }
