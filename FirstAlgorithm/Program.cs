@@ -6,9 +6,33 @@ class Program
         Random rnd = new Random();
         List<string> people = new List<string>();
         List<int> turn = new List<int>();
+        int remainingSeeds = 0;
 
         System.Console.WriteLine("Enter the number of the people you have to put in queue:");
-        int remainingSeeds = Convert.ToInt32(Console.ReadLine());
+        bool problem = true;
+        while (problem)
+        {
+            string? val = Console.ReadLine();
+
+            try
+            {
+                remainingSeeds = Convert.ToInt32(val);
+                if (remainingSeeds < 0)
+                {
+                    throw new InvalidDataException("Number must be greater than or equal to 0, please try again:");
+                }
+                problem = false;
+            }
+            catch (FormatException)
+            {
+                System.Console.WriteLine("Not a number!! please try again:");
+            }
+            catch (InvalidDataException ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+        }
+
         System.Console.Write("Do you want to name your people? (Y,N) ");
         if (Console.ReadLine() == "Y")
         {
